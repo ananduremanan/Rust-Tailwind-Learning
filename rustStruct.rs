@@ -42,3 +42,50 @@ fn main() {
     gr_item1.display(&grocery_list);
     gr_item2.display(&grocery_list);
 }
+
+
+// Otimized code
+
+use std::collections::HashMap;
+
+struct Store {
+    grocery_list: HashMap<u32, String>,
+}
+
+impl Store {
+    fn new() -> Store {
+        Store {
+            grocery_list: HashMap::new(),
+        }
+    }
+
+    fn add(&mut self, id: u32, name: String) {
+        self.grocery_list.insert(id, name);
+        println!("Grocery item added!");
+    }
+
+    fn delete(&mut self, id: u32) {
+        if let Some(_) = self.grocery_list.remove(&id) {
+            println!("Grocery item removed!");
+        } else {
+            println!("Grocery item not found!");
+        }
+    }
+
+    fn display(&self) {
+        println!("Grocery List: {:?}", self.grocery_list);
+    }
+}
+
+fn main() {
+    let mut store = Store::new();
+
+    store.add(1, "Apple".to_string());
+    store.add(2, "Wheat".to_string());
+
+    store.display();
+
+    store.delete(1);
+
+    store.display();
+}
